@@ -5,7 +5,7 @@ import { bstore, Method } from "./bstore";
 export interface BstoreListResponse{
   status: number;
   message: string;
-  file: BstoreFile;
+  file?: BstoreFile;
 }
 
 export async function get(path: string, access: 'public' | 'private'): Promise<BstoreListResponse> {

@@ -1,4 +1,15 @@
-"use server";
+type WebFile = File;
+type MaybeBunFile = any;
+type MaybeDenoFile = any;
+
+//let environment: 'web' | 'bun' | 'deno' | 'node' = 'web';
+let environment: 'web' | 'node' = 'web';
+
+if (environment === 'web' && typeof process !== 'undefined') {
+  environment = 'node';
+}
+
+export type BstoreFile = typeof environment extends 'bun' ? MaybeBunFile : typeof environment extends 'deno' ? MaybeDenoFile : WebFile;
 
 const BStoreRWKey = [
   process.env.BSTORE_READ_WRITE_KEY,
@@ -16,14 +27,14 @@ const BstoreHost = [
   process.env.REACT_APP_BSTORE_HOST,
 ].find(key => key !== undefined) || 'http://localhost:8080';
 
-export async function getBstoreHost(): Promise<string> {
+export function getBstoreHost(): string {
   if (BstoreHost) {
     return BstoreHost;
   }
   throw new Error('BStore Host not set. Valid keys are PUBLIC_BSTORE_HOST, BSTORE_HOST, NEXT_PUBLIC_BSTORE_HOST, VITE_BSTORE_HOST, REACT_APP_BSTORE_HOST');
 }
 
-export async function getBstoreRWKey(): Promise<string> {
+export function getBstoreRWKey(): string {
   if (BStoreRWKey) {
     return BStoreRWKey;
   }
