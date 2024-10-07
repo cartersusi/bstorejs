@@ -1,11 +1,11 @@
 {
-    "version": "1.0.0",
+    "version": "0.1.0",
     "name": "bstore",
     "license": "MIT",
     "description": "API Interface for Bstore, a simple blob store.",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cartersusi/bstorejs",
+        "url": "https://github.com/cartersusi/bstorejs/bstore",
         "directory": ""
     },
     "files": [
