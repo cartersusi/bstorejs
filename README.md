@@ -1,19 +1,36 @@
-## [Bstorejs](https://github.com/cartersusi/bstore)
+## [Bstore](https://github.com/cartersusi/bstore)
 
-* `@bstorejs/bstore` - Express/Vanilla Js/Ts
-* `@bstorejs/react` - React/Nextjs Js/Ts (Server Actions)
-
-### Keys
-```ts
-export const BstoreHost = [
-    process.env.PUBLIC_BSTORE_HOST,
-    process.env.NEXT_PUBLIC_BSTORE_HOST,
-    process.env.REACT_APP_BSTORE_HOST,
-].find(key => key !== undefined) || '';
-
-const BStoreRWKey = [
-  process.env.BSTORE_READ_WRITE_KEY,
-  process.env.PRIVATE_BSTORE_READ_WRITE_KEY,
-  process.env.BSTORE_PRIVATE_READ_WRITE_KEY,
-].find(key => key !== undefined) || '';
+### Install
+```sh
+npm i bstorejs
 ```
+
+### Import
+```ts
+import { put, get, list, del } from 'bstorejs';
+```
+
+### Functions
+
+```ts
+// Upload a File
+const file = Bun.file(music.mp4);
+const res = await put('videos/music.mp4', 'public', file);
+
+// Download a File
+const res = await get('videos/music.mp4', 'public');
+const file = res.file as File;
+await Bun.write('output/music.mp4', file);
+
+
+// Delete a File
+const res = await Del('hentai/image.png', 'private');
+console.log(res.status)
+```
+
+### Host
+
+```html
+<video src="http://localhost:8080/bstore/videos/video.mp4" controls class="max-w-full max-h-full"></video>
+```
+
