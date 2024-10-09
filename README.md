@@ -75,7 +75,7 @@ const res = await list('images/', 'public');
 console.log(res.files)
 ```
 
-### Host
+### Serving Public Files
 
 ```html
 <video src="http://localhost:8080/bstore/videos/video.mp4" controls class="max-w-full max-h-full"></video>
