@@ -55,10 +55,24 @@ const res = await get('videos/music.mp4', 'public');
 const file = res.file as File;
 await Bun.write('output/music.mp4', file);
 ```
+
 3. Delete a File - `del`
 ```ts
 const res = await del('hentai/image.png', 'private');
 console.log(res.status)
+```
+
+4. Delete a Directory
+- Must specify with `*` to prevent accidental deletes. 
+```ts
+const res = await del('tmp_data/*', 'public');
+console.log(res.status)
+```
+
+1. List a Directory
+```ts
+const res = await list('images/', 'public');
+console.log(res.files)
 ```
 
 ### Host
