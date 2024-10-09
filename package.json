@@ -1,6 +1,6 @@
 {
     "name": "bstorejs",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "API Interface for Bstore, a simple blob store.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
