@@ -1,15 +1,28 @@
-type WebFile = File;
-type MaybeBunFile = any;
-type MaybeDenoFile = any;
+// https://github.com/oven-sh/bun/blob/main/packages/bun-types/bun.d.ts#L1063
+interface BunFile extends Blob {
+  slice(begin?: number, end?: number, contentType?: string): BunFile;
+  slice(begin?: number, contentType?: string): BunFile;
 
-//let environment: 'web' | 'bun' | 'deno' | 'node' = 'web';
-let environment: 'web' | 'node' = 'web';
+  slice(contentType?: string): BunFile;
+  writer(options?: { highWaterMark?: number }): FileSink;
 
-if (environment === 'web' && typeof process !== 'undefined') {
-  environment = 'node';
+  readonly readable: ReadableStream;
+  lastModified: number;
+  readonly name?: string;
+  exists(): Promise<boolean>;
+}
+interface FileSink {
+  write(chunk: string | ArrayBufferView | ArrayBuffer | SharedArrayBuffer): number;
+  flush(): number | Promise<number>;
+  end(error?: Error): number | Promise<number>;
+  start(options?: {
+    highWaterMark?: number;
+  }): void;
+    ref(): void;
+    unref(): void;
 }
 
-export type BstoreFile = typeof environment extends 'bun' ? MaybeBunFile : typeof environment extends 'deno' ? MaybeDenoFile : WebFile;
+export type BstoreFile = File | BunFile | Blob;
 
 const BStoreRWKey = [
   process.env.BSTORE_READ_WRITE_KEY,

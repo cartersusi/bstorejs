@@ -23,20 +23,40 @@ npm i bstorejs
 import { put, get, list, del } from 'bstorejs';
 ```
 
-### Functions
+### Usage
+
+**Accepted File/Blob Types**
+- Bun
+- Web
+- Blob
 
 ```ts
-// Upload a File
-const file = Bun.file(music.mp4);
-const res = await put('videos/music.mp4', 'public', file);
+/* Bun File https://bun.sh/docs/api/file-io */
+const file = Bun.file("music.mp4");
 
-// Download a File
+/* Web File https://developer.mozilla.org/en-US/docs/Web/API/File */
+const buffer = await fs.readFile("music.mp4");
+const file = new File([buffer], "music.mp4");
+
+/* Blob https://nodejs.org/api/buffer.html#class-blob */
+const buffer = await fs.readFile("music.mp4");
+const file = new Blob([buffer], { type: "video/mp4" });
+```
+
+1. Upload a File - `put`
+```ts
+const res = await put(file, 'videos/music.mp4', 'public');
+console.log(res.url)
+```
+
+2. Download a File - `get`
+```ts
 const res = await get('videos/music.mp4', 'public');
 const file = res.file as File;
 await Bun.write('output/music.mp4', file);
-
-
-// Delete a File
+```
+3. Delete a File - `del`
+```ts
 const res = await del('hentai/image.png', 'private');
 console.log(res.status)
 ```

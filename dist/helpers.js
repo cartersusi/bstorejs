@@ -1,8 +1,3 @@
-//let environment: 'web' | 'bun' | 'deno' | 'node' = 'web';
-let environment = 'web';
-if (environment === 'web' && typeof process !== 'undefined') {
-    environment = 'node';
-}
 const BStoreRWKey = [
     process.env.BSTORE_READ_WRITE_KEY,
     process.env.BSTORE_READ_KEY,
