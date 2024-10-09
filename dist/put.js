@@ -1,5 +1,5 @@
 import { bstore, Method } from "./bstore";
-export async function put(path, access, file) {
+export async function put(file, path, access) {
     if (!file) {
         return {
             status: 400,
@@ -8,9 +8,9 @@ export async function put(path, access, file) {
         };
     }
     const res = await bstore({ method: Method.PUT,
+        file: file,
         path: path,
         access: access,
-        file: file
     });
     return {
         status: res.status,

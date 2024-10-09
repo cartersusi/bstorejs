@@ -8,7 +8,7 @@ export interface BstorePutResponse {
     url: string;
 }
 
-export async function put(path: string, access: 'public' | 'private', file: BstoreFile): Promise<BstorePutResponse> {
+export async function put(file: BstoreFile, path: string, access: 'public' | 'private'): Promise<BstorePutResponse> {
     if (!file) {
         return {
             status: 400,
@@ -19,9 +19,9 @@ export async function put(path: string, access: 'public' | 'private', file: Bsto
     }
 
     const res = await bstore({ method: Method.PUT, 
+        file: file,
         path: path, 
         access: access, 
-        file: file 
     });
 
     return {
