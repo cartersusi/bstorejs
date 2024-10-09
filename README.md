@@ -37,7 +37,7 @@ await Bun.write('output/music.mp4', file);
 
 
 // Delete a File
-const res = await Del('hentai/image.png', 'private');
+const res = await del('hentai/image.png', 'private');
 console.log(res.status)
 ```
 
