@@ -20,8 +20,8 @@
     ],
     "scripts": {
         "build:bstore": "tsc -p tsconfig.json",
-        "build": "npm run build:bstore",
-        "prepublishOnly": "npm run build"
+        "build": "bun run build:bstore",
+        "prepublishOnly": "bun run build"
     },
     "keywords": [
         "bstore",
@@ -30,10 +30,12 @@
     ],
     "author": "Carter Susi",
     "license": "MIT",
+    "engines": {
+        "node": ">=20.0.0",
+        "bun": ">=1.0.0",
+        "deno": ">=1.0.0"
+    },
     "devDependencies": {
         "@types/node": "^22.7.5"
-    },
-    "dependencies": {
-        "node": "^22.0.0"
     }
 }
