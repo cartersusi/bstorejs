@@ -84,8 +84,11 @@ console.log(res.files)
 ### Serving Public Files
 
 ```html
-<video src="http://localhost:8080/bstore/videos/video.mp4" controls class="max-w-full max-h-full"></video>
 <img src="http://localhost:8080/bstore/image/image.mp4" class="max-w-full max-h-full object-contain"></img>
 <embed src="http://localhost:8080/bstore/books/book.mp4" type="application/pdf" className="w-full h-full border-0"></embed>
 ```
 
+### Steaming Public Videos
+```html
+<video src="http://localhost:8080/stream/videos/video.mp4" controls class="max-w-full max-h-full"></video>
+```
