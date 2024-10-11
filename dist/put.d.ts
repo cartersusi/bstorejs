@@ -4,4 +4,4 @@ export interface BstorePutResponse {
     message: string;
     url: string;
 }
-export declare function put(path: string, access: 'public' | 'private', file: BstoreFile): Promise<BstorePutResponse>;
+export declare function put(file: BstoreFile, path: string, access: 'public' | 'private'): Promise<BstorePutResponse>;
