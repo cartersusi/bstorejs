@@ -92,8 +92,23 @@ if [[ -n $(git status -s) ]]; then
     fi
 fi
 
-git add .
-git commit -m "auto update"
-git push
+if git add .; then
+    success "Added all changes to the staging area."
+else
+    error "Failed to add changes to the staging area."
+fi
 
+if git commit -m "auto update"; then
+    success "Committed changes."
+else
+    error "Failed to commit changes."
+fi
+
+if git push; then
+    success "Pushed changes to the repository."
+else
+    error "Failed to push changes to the repository."
+fi
+
+info_bold "Publishing to npm..."
 npm publish
