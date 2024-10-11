@@ -93,8 +93,7 @@ if [[ -n $(git status -s) ]]; then
 fi
 
 git add .
-git commit -m "Release v$(jq -r '.version' package.json)"
-git tag "v$(jq -r '.version' package.json)"
-git push origin master --tags
+git commit -m "auto update"
+git push
 
 npm publish
