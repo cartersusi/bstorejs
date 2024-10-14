@@ -89,6 +89,52 @@ console.log(res.files)
 ```
 
 ### Steaming Public Videos
+**Example Using a `.mp4` Video**
+- Also Accepts: `.mp4`, `.webm`, `.ogg`, `.wmv`, `.mov`, `.avchd`, `.av1`
+
+1. **Upload the `.mp4` Video**
+```ts
+const res = await put(file, 'music/song.mp4', 'public');
+console.log(res.url)
+```
+```json
+{
+    "url": "http://localhost:8080/bstore/music/song.mp4",
+    "message": "Public File Uploaded Successfully",
+    "stream": {
+        "hls_url": "http://localhost:8080/bstore/music/song/index.m3u8",
+        "dash_url": "http://localhost:8080/bstore/music/song/index.mpd"
+    }
+}
+```
+
+2. **Serve the `.mp4`, `.mpd`, and `.m3u8` Files**
 ```html
-<video src="http://localhost:8080/stream/videos/video.mp4" controls class="max-w-full max-h-full"></video>
+<head>
+  <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+  <video id="videoPlayer" controls className="w-full h-full border-0">
+    <source src="http://localhost:8080/bstore/music/song/index.m3u8" type="application/x-mpegURL">
+    <source src="http://localhost:8080/bstore/music/song/index.mpd" type="application/dash+xml">
+    <source src="http://localhost:8080/bstore/music/song.mp4" type="video/mp4">
+  </video>
+  <script>
+    var video = document.querySelector("#videoPlayer");
+    var dash_url = "http://localhost:8080/bstore/music/song/index.mpd";
+    var hls_url = "http://localhost:8080/bstore/music/song/index.m3u8";
+
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(hls_url);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = hls_url;
+    } else if (dashjs.supportsMediaSource()) {
+      var player = dashjs.MediaPlayer().create();
+      player.initialize(video, dash_url, true);
+    }
+  </script>
+</body>
 ```
